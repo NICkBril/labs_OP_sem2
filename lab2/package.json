@@ -1,0 +1,21 @@
+{
+  "name": "lab2",
+  "version": "1.0.0",
+  "description": "Lab2: Project Setup - modular library from Lab1",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NICkBril/OP_labs_2sem.git"
+  },
+  "keywords": ["lab2", "generators", "iterators", "library", "example"],
+  "author": "Nick Bril",
+  "license": "MIT",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/NICkBril/OP_labs_2sem/issues"
+  },
+  "homepage": "https://github.com/NICkBril/OP_labs_2sem#readme"
+}
