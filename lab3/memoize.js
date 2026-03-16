@@ -1,4 +1,7 @@
-function memoize(fn) {
+function memoize(fn, options = {}) {
+    const maxSize = options.maxSize || Infinity;
+    const policy = options.policy || "LRU";
+
     const cache = new Map();
 
     return function (...args) {
@@ -9,6 +12,12 @@ function memoize(fn) {
         }
 
         const result = fn(...args);
+
+        if (cache.size >= maxSize) {
+            const first = cache.keys().next().value;
+            cache.delete(first);
+        }
+
         cache.set(key, result);
 
         return result;
