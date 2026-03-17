@@ -8,7 +8,14 @@ function memoize(fn, options = {}) {
         const key = JSON.stringify(args);
 
         if (cache.has(key)) {
-            return cache.get(key);
+            const value = cache.get(key);
+
+            if (policy === "LRU") {
+                cache.delete(key);
+                cache.set(key, value);
+            }
+
+            return value;
         }
 
         const result = fn(...args);
