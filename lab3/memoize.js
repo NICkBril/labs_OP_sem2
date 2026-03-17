@@ -59,3 +59,5 @@ function memoize(fn, options = {}) {
         return result;
     };
 }
+
+module.exports = memoize;
