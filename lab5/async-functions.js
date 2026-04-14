@@ -20,4 +20,14 @@ function mapAsync(array, iteratee, callback) {
   }
 }
 
-module.exports = { mapAsync };
+function mapPromise(array, iteratee) {
+  return new Promise((resolve, reject) => {
+    const promises = array.map(item => iteratee(item));
+
+    Promise.all(promises)
+      .then(res => resolve(res))
+      .catch(err => reject(err));
+  });
+}
+
+module.exports = { mapAsync, mapPromise };
