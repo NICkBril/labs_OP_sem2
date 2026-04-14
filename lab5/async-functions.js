@@ -20,13 +20,29 @@ function mapAsync(array, iteratee, callback) {
   }
 }
 
-function mapPromise(array, iteratee) {
+function mapPromise(array, iteratee, signal) {
   return new Promise((resolve, reject) => {
+    if (signal?.aborted) {
+      return reject(new Error("Aborted"));
+    }
+
+    const abortHandler = () => {
+      reject(new Error("Aborted"));
+    };
+
+    signal?.addEventListener('abort', abortHandler);
+
     const promises = array.map(item => iteratee(item));
 
     Promise.all(promises)
-      .then(res => resolve(res))
-      .catch(err => reject(err));
+      .then(res => {
+        signal?.removeEventListener('abort', abortHandler);
+        resolve(res);
+      })
+      .catch(err => {
+        signal?.removeEventListener('abort', abortHandler);
+        reject(err);
+      });
   });
 }
 
