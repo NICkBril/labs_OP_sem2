@@ -4,6 +4,10 @@ const readline = require("readline");
 async function processFile(filePath) {
   const stream = fs.createReadStream(filePath);
 
+  stream.on("error", (err) => {
+    throw err;
+  });
+
   const rl = readline.createInterface({
     input: stream,
     crlfDelay: Infinity,
