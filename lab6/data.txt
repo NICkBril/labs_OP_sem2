@@ -1,0 +1,9 @@
+line1
+line2
+line3
+error
+line6
+ERROR
+ERROR
+line9
+Error
