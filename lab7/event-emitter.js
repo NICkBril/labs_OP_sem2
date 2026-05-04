@@ -32,6 +32,8 @@ class EventEmitter {
           }
         }
       });
+    } else if (eventName === 'error') {
+      console.error('[Fallback Error Logging]:', data);
     }
   }
 }

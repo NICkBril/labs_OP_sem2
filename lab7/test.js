@@ -16,9 +16,20 @@ const alarm = (temp) => {
   }
 };
 
+const brokenListener = () => {
+  throw new Error('Something went wrong in listener');
+};
+
+const errorHandler = (err) => {
+  console.log(`[Error Handler]: ${err}`);
+};
+
 const unsubscribeDisplay = sensor.subscribe('tempChange', display);
 sensor.subscribe('tempChange', logger);
 sensor.subscribe('tempChange', alarm);
+
+sensor.subscribe('tempChange', brokenListener);
+sensor.subscribe('error', errorHandler);
 
 console.log('--- First update ---');
 sensor.updateTemperature(25);
