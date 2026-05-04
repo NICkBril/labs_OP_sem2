@@ -27,7 +27,6 @@ const errorHandler = (err) => {
 const unsubscribeDisplay = sensor.subscribe('tempChange', display);
 sensor.subscribe('tempChange', logger);
 sensor.subscribe('tempChange', alarm);
-
 sensor.subscribe('tempChange', brokenListener);
 sensor.subscribe('error', errorHandler);
 
@@ -39,5 +38,12 @@ sensor.updateTemperature(35);
 
 console.log('\n--- Unsubscribe display ---');
 unsubscribeDisplay();
-
 sensor.updateTemperature(22);
+
+console.log('\n--- Sensor 2 test (Demonstrating fallback error logging) ---');
+const sensor2 = new TemperatureSensor();
+
+sensor2.subscribe('tempChange', display);
+sensor2.subscribe('tempChange', brokenListener);
+
+sensor2.updateTemperature(28);
