@@ -21,7 +21,16 @@ class EventEmitter {
 
     if (eventCallbacks && eventCallbacks.length > 0) {
       eventCallbacks.forEach(callback => {
-        callback(data);
+        try {
+          callback(data);
+        } catch (err) {
+          if (eventName !== 'error') {
+            this.emit(
+              'error', 
+              `Error in listener for "${eventName}": ${err.message}`
+            );
+          }
+        }
       });
     }
   }
