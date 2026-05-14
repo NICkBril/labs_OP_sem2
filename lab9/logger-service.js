@@ -12,7 +12,12 @@ class LoggerService {
     }
 
     log(level, message, context = {}) {
-        // logic ....
+        const currentLevel = Levels[level] || 2;
+
+        if (currentLevel >= this.threshold) {
+            const formatted = this.formatter.format(level, message, context);
+            this.output.write(formatted);
+        }
     }
 }
 
